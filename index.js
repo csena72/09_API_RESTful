@@ -39,14 +39,40 @@ routerApi.post("/productos", (req, res) => {
 });
 
 routerApi.put("/productos/:id", (req, res) => {
-  //TODO: implementar metodo
-  res.send(req.body);
+  
+  let id = parseInt(req.params.id);  
+  
+  let { title, price, thumbnail } = req.body[0];  
+
+  let producto = productos.filter(function (producto) {
+    return producto.id == id;
+  });
+  
+  if(!producto.length > 0){
+    res.send( { error: "No existe el producto" });
+  }
+
+  productos.splice( id - 1, 1, { title, price, thumbnail, id } );  
+  
+  res.send({ title, price, thumbnail, id });
 });
 
 routerApi.delete("/productos/:id", (req, res) => {
-  // TODO: implementar metodo
+  let id = parseInt(req.params.id);  
 
-  res.send(req.body);
+  let producto = productos.filter(function (producto) {
+    return producto.id == id;
+  });
+  
+  if(!producto.length > 0){
+    res.send( { error: "No existe el producto" });
+  }
+    
+  productos = productos.filter(function (producto) {
+    return producto.id != id;
+  });
+
+  res.send(producto);
 });
 
 app.use('/api', routerApi);
