@@ -22,3 +22,24 @@ Sobre el proyecto entregable de la clase anterior, incorporar las siguientes rut
 - Crear un espacio público de servidor que contenga un documento index.html con un formulario de ingreso de productos con los datos apropiados.
 
 - Probar la funcionalidad con Postman y el formulario de ingreso de datos.
+
+
+## Ejemplo para consumir el EP que actualiza un producto:
+
+```
+curl --location --request PUT 'localhost:8080/api/productos/2' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "title": "manzana",
+        "price": "222",
+        "thumbnail": "dsafwea"        
+    }
+]'
+```
+
+## Ejemplo para consumir el EP que borra un producto:
+
+```
+curl --location --request DELETE 'localhost:8080/api/productos/2'
+```
